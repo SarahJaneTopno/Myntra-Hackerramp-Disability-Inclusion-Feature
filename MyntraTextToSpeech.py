@@ -62,30 +62,3 @@ print(finaltext)
 
 
 
-# try:
-#     o["title"]=soup.find('h1',{'class':'pdp-title'}).text.lstrip().rstrip()
-# except:
-#     o["title"]=None
-
-# try:
-#     o["rating"]=soup.find('div',{'class':'index-overallRating'}).find('div').text.lstrip().rstrip()
-# except:
-#     o["rating"]=None
-
-# try:
-#     o["price"]=soup.find('span',{'class':'pdp-price'}).text.lstrip().rstrip()
-# except:
-#     o["price"]=None
-
-
-# l.append(o)
-# tts = gTTS(text=l, lang='en')
-# tts.save("output.mp3")   
-# os.system("start output.mp3")
-
-
-# print(l)
-
-
-# Close the browser
-# driver.quit()
