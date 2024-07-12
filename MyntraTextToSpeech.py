@@ -16,48 +16,50 @@ service = Service(executable_path=PATH)
 options = webdriver.ChromeOptions()
 # options.add_argument("--headless")
 driver = webdriver.Chrome(service=service, options=options)
+link = "https://www.myntra.com/sweatshirts/the+souled+store/the-souled-store-checked-round-neck-acrylic-sweatshirt/26725732/buy"
 
-driver.get("https://www.myntra.com/ethnic-dresses/anayna/anayna-red-floral-ethnic-a-line-cotton-midi-ethnic-dress/21334304/buy")
+driver.get(link)
 
 html_content = driver.page_source
 
 soup=BeautifulSoup(html_content,'html.parser')
-
-target_div = soup.find('div', attrs={'class':'pdp-productDescriptorsContainer'})
-
-
-texts=""
-for t in target_div:
-    original = t.text
-    formatted = ""
-    for c in original:
-        
-        if(c.isupper() or c=="\n"):
-            formatted = formatted + "\n"  
-        formatted += c   
-    texts = texts+formatted+"   "
-
-
-
-
-# take a dictionary
-items = {}
+items={}
 items['The product is'] = soup.find('h1', attrs={'class':'pdp-title'}).text
 items['name of the product is '] = soup.find('h1', attrs={'class':'pdp-name'}).text
 items['price'] = soup.find('span', attrs={'class':'pdp-price'}).text
-items['product description'] = texts
+# target_div = soup.find('div', attrs={'class':'pdp-productDescriptorsContainer'})
 
+product_description_container = soup.find('div', attrs={'class':'pdp-productDescriptorsContainer'})
+product_description = product_description_container.find('p', attrs={'class':'pdp-product-description-content'}).text
+items['product description '] = product_description
+size_material = product_description_container.find_all('div',attrs={'class':'pdp-sizeFitDesc'})
+material_care = ""
+if(len(size_material)>=2):
+    material_care = size_material[1].find('p',class_='pdp-sizeFitDescContent').text
 
+else:
+    material_care = size_material.find('p',class_='pdp-sizeFitDescContent').text
+    
+items['material and care '] = material_care
 
-finaltext=""
+specification = product_description_container.find('div', attrs={'class':'index-sizeFitDesc'})
+specs = specification.find_all('div', attrs={"class":'index-row'})
+items['specifications']=""
+for each in specs:
+    title = each.find('div',attrs={'class':'index-rowKey'}).text
+    cont = each.find('div',attrs={'class':'index-rowValue'}).text
+    items['specifications']+= title + ", " + cont+"\n"
+    
+text=""
 for k in items:
-    finaltext = finaltext+"\n"+ k+" "+ items[k]+"\n"
-   
+    text = text + "\n" + k + "\n " + items[k]
 
-tts = gTTS(text=finaltext, lang='en')
+print(text)
+#convert it to speech
+tts = gTTS(text=text, lang='en')
 tts.save("output.mp3")   
 os.system("start output.mp3")
-print(finaltext)
+
 
 
 
