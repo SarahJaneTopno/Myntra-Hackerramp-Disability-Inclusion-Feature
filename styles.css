@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
+}
+
+.container {
+    text-align: center;
+}
+
+.status {
+    position: absolute;
+    bottom: -90px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(234, 30, 132); 
+}
+
+.mic-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.mic-icon {
+    width: 150px;
+    height: 150px;
+}
+
+.wave {
+    position: absolute;
+    border: 2px solid #ff66b2; /* Pink color to match the mic */
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    opacity: 0.5;
+}
+
+.wave1 {
+    width: 180px;
+    height: 180px;
+    top: -15px;
+    left: -15px;
+    animation-delay: 0s;
+}
+
+.wave2 {
+    width: 210px;
+    height: 210px;
+    top: -30px;
+    left: -30px;
+    animation-delay: 0.5s;
+}
+
+.wave3 {
+    width: 240px;
+    height: 240px;
+    top: -45px;
+    left: -45px;
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+}
