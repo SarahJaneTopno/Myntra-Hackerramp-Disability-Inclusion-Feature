@@ -1,7 +1,17 @@
 import speech_recognition as sr
 import webbrowser
+import os
 
 sr.Microphone(device_index=1)
+
+# Get the path to the current directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Path to the HTML file
+html_file = os.path.join(current_dir, 'mic.html')
+
+# Open the HTML file in the default web browser
+webbrowser.open(f'file://{html_file}')
 
 r = sr.Recognizer()
 r.energy_threshold = 5000
