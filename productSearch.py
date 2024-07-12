@@ -1,6 +1,16 @@
 import speech_recognition as sr
 import webbrowser
 import re
+import os
+
+# Get the path to the current directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Path to the HTML file
+html_file = os.path.join(current_dir, 'mic.html')
+
+# Open the HTML file in the default web browser
+webbrowser.open(f'file://{html_file}')
 
 # Initialize the recognizer
 r = sr.Recognizer()
@@ -9,7 +19,8 @@ r.energy_threshold = 5000
 # Predefined product links
 product_links = {
     "hm boys 3 pack jeans": "https://www.myntra.com/jeans/h%26m/hm-boys-3-pack-comfort-skinny-fit-jeans/26313234/buy",
-    "crop cotton denim jacket": "https://www.myntra.com/jackets/street+9/street-9-v-neck-sleeveless-crop-cotton-denim-jacket/25578232/buy"
+    "crop cotton denim jacket": "https://www.myntra.com/jackets/street+9/street-9-v-neck-sleeveless-crop-cotton-denim-jacket/25578232/buy",
+    "floral printed kurti": "https://www.myntra.com/kurtis/kalini/kalini-floral-printed-notched-neck-cotton-top/26781720/buy"
     # Add more product names and links here
 }
 
